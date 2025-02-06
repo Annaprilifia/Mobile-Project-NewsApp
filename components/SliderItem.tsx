@@ -4,6 +4,8 @@ import { NewsDataType } from '@/types';
 import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/constants/Colors';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Link } from 'expo-router';
 
 type Props = {
   slideItem: NewsDataType;
@@ -56,7 +58,7 @@ const SliderItem = ({ slideItem, index, scrollX }: Props) => {
       setFaviconUrl(slideItem.source_icon);
     } else {
       const faviconFallback = 'https://example.com/default-icon.png'; // Ganti dengan URL ikon default
-      const faviconUrl = getFaviconUrl(slideItem.source.url);
+      const faviconUrl = getFaviconUrl(slideItem.url);
 
       if (faviconUrl) {
         fetch(faviconUrl)
@@ -76,9 +78,11 @@ const SliderItem = ({ slideItem, index, scrollX }: Props) => {
         setFaviconUrl(faviconFallback);
       }
     }
-  }, [slideItem.source.url, slideItem.source_icon]);
+  }, [slideItem.url, slideItem.source_icon]);
 
   return (
+    <Link href={`/news/${slideItem.id}`} asChild>
+    <TouchableOpacity>
     <Animated.View 
       style={[styles.itemWrapper, rnStyle]}
     >
@@ -89,11 +93,13 @@ const SliderItem = ({ slideItem, index, scrollX }: Props) => {
             source={{ uri: faviconUrl || 'https://example.com/default-icon.png' }}
             style={styles.sourceIcon}
           />
-          <Text style={styles.sourceName}>{slideItem.source.name}</Text>
+          <Text style={styles.sourceName}>{slideItem.authors}</Text>
         </View>
         <Text style={styles.title} numberOfLines={2}>{slideItem.title}</Text>
       </LinearGradient>
     </Animated.View>
+    </TouchableOpacity>
+    </Link>
   );
 };
 

@@ -29,7 +29,7 @@ const Page = () => {
             style={styles.title}
             entering={FadeInRight.delay(300).duration(500)}
           >
-            Stay Updated
+            Stay Updated!
           </Animated.Text>
           <Animated.Text 
             style={styles.description}

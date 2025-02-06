@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import React, { useEffect } from "react";
-import { icon } from "@/constants/Icons";
+import { icon } from "@/constants/Icons"; // Mengimpor objek ikon
 import Animated, {
   interpolate,
   useAnimatedStyle,
@@ -39,16 +39,26 @@ const TabBarButton = ({
     };
   });
 
+  // Cek apakah icon[routeName] valid sebelum digunakan
+  const IconComponent = icon[routeName];
+
   return (
     <Pressable
       onPress={onPress}
       onLongPress={onLongPress}
       style={styles.tabbarBtn}
     >
-      {icon[routeName]({
-        color: isFocused ? Colors.tabIconSelected : Colors.tabIconDefault,
-        focused: isFocused,
-      })}
+      {IconComponent ? (
+        // Jika IconComponent valid, panggil
+        <IconComponent
+          color={isFocused ? Colors.tabIconSelected : Colors.tabIconDefault}
+          focused={isFocused}
+        />
+      ) : (
+        // Jika tidak ada, tampilkan ikon default atau kosong
+        <></>
+      )}
+
       <Animated.Text
         style={[
           {

@@ -1,8 +1,8 @@
-import { View, StyleSheet, LayoutChangeEvent } from 'react-native';
+import { View, StyleSheet, LayoutChangeEvent, Text } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import TabBarButton from '@/components/TabBarButton';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Colors } from '@/constants/Colors';
 
 export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
@@ -19,38 +19,31 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   
   const tabPositionX = useSharedValue(0);
 
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: tabPositionX.value }],
-    };
-  });
-  
+  useEffect(() => {
+    tabPositionX.value = withTiming(buttonWidth * state.index, { duration: 200 });
+  }, [buttonWidth, state.index]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: tabPositionX.value }],
+  }));
+
   return (
     <View onLayout={onTabbarLayout} style={styles.tabbar}>
-      <Animated.View style={[animatedStyle, {
-        position: 'absolute',
-        backgroundColor: Colors.tint,
-        top: 52,
-        left: 34,
-        height: 8,
-        width: 40,
-      }]} />
+      <Animated.View style={[styles.indicator, animatedStyle]} />
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+        let label = options.tabBarLabel ?? options.title ?? route.name;
+
+        // Pastikan label selalu berupa string
+        if (typeof label !== 'string') {
+          label = String(label);
+        }
 
         const isFocused = state.index === index;
 
         const onPress = () => {
-          tabPositionX.value = withTiming(buttonWidth * index, {
-            duration: 200,
-          }); 
-          
+          tabPositionX.value = withTiming(buttonWidth * index, { duration: 200 });
+
           const event = navigation.emit({
             type: "tabPress",
             target: route.key,
@@ -88,7 +81,15 @@ const styles = StyleSheet.create({
   tabbar: {
     flexDirection: 'row',
     paddingTop: 16,
-    paddingBottom:40,
+    paddingBottom: 40,
     backgroundColor: Colors.white,
-  }
-})
+  },
+  indicator: {
+    position: 'absolute',
+    backgroundColor: Colors.tint,
+    top: 52,
+    left: 34,
+    height: 8,
+    width: 40,
+  },
+});
