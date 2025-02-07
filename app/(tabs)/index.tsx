@@ -8,7 +8,6 @@ import { NewsDataType } from '@/types';
 import BreakingNews from '@/components/BreakingNews';
 import Categories from '@/components/Categories';
 import NewsList from '@/components/NewsList';
-// import { ScrollView } from 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Loading from '@/components/Loading';
 
@@ -19,7 +18,7 @@ const Page = (props: Props) => {
   const [breakingNews, setBreakingNews] = useState<NewsDataType[]>([]);
   const [news, setNews] = useState<NewsDataType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState(""); // Tambahkan state untuk search
+  const [searchQuery, setSearchQuery] = useState(""); 
 
   useEffect(() => {
     getBreakingNews();
@@ -101,7 +100,7 @@ const Page = (props: Props) => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ScrollView style={[styles.container, { paddingTop: safeTop }]}>
         <Header />
-        <SearchBar withHorizontalPadding={true} setSearchQuery={setSearchQuery} /> {/* Perbaiki error di sini */}
+        <SearchBar withHorizontalPadding={true} setSearchQuery={setSearchQuery} /> 
         {isLoading ? (
           <Loading size={'large'} />
         ) : (

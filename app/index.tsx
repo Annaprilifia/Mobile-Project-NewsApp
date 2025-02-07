@@ -29,13 +29,13 @@ const Page = () => {
             style={styles.title}
             entering={FadeInRight.delay(300).duration(500)}
           >
-            Stay Updated!
+           <Text>Stay Updated!</Text> 
           </Animated.Text>
           <Animated.Text 
             style={styles.description}
             entering={FadeInRight.delay(700).duration(500)}
           >
-            Get breaking news and personalized updates directly to your feed.
+            <Text>Get breaking news and personalized updates directly to your feed.</Text>
           </Animated.Text>
           <Animated.View entering={FadeInDown.delay(1200).duration(500)}>
             <TouchableOpacity 

@@ -15,11 +15,10 @@ type Props = {
 
 const { width } = Dimensions.get('screen');
 
-// Fungsi untuk membangun URL favicon menggunakan Clearbit API
 const getFaviconUrl = (sourceUrl: string) => {
   try {
     const url = new URL(sourceUrl);
-    return `https://logo.clearbit.com/${url.hostname}`; // Menggunakan Clearbit Logo API
+    return `https://logo.clearbit.com/${url.hostname}`;
   } catch (error) {
     console.warn("Invalid URL for favicon:", sourceUrl);
     return null;
@@ -53,7 +52,6 @@ const SliderItem = ({ slideItem, index, scrollX }: Props) => {
   const [faviconUrl, setFaviconUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    // Jika source_icon tersedia, gunakan langsung
     if (slideItem.source_icon) {
       setFaviconUrl(slideItem.source_icon);
     } else {

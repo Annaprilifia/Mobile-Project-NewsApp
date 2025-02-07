@@ -13,7 +13,6 @@ type Props = {};
 const Page = (props: Props) => {
   const { top: safeTop } = useSafeAreaInsets();
 
-  // State untuk data pencarian
   const { newsCategories, toggleNewsCategory } = useNewsCategories();
   const { newsCountries, toggleNewsCountries } = useNewsCountries();
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,10 +21,8 @@ const Page = (props: Props) => {
 
   return (
     <View style={[styles.container, { paddingTop: safeTop + 20 }]}>
-      {/* Search Bar */}
       <SearchBar withHorizontalPadding={false} setSearchQuery={setSearchQuery} />
 
-      {/* Categories */}
       <Text style={styles.title}>Categories</Text>
       <View style={styles.listContainer}>
         {newsCategories?.map((item) => (
@@ -41,7 +38,6 @@ const Page = (props: Props) => {
         ))}
       </View>
 
-      {/* Countries */}
       <Text style={styles.title}>Country</Text>
       <View style={styles.listContainer}>
         {newsCountries?.map((item, index) => (
@@ -57,7 +53,6 @@ const Page = (props: Props) => {
         ))}
       </View>
 
-      {/* Search Button */}
       <Pressable style={styles.searchBtn}>
         <Link
           href={{

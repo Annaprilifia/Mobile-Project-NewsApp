@@ -6,7 +6,6 @@ import { Colors } from "@/constants/Colors";
 const Header = () => {
   return (
     <View style={styles.container}>
-      {/* Bagian Kiri (User Info) */}
       <View style={styles.userInfo}>
         <Image
           source={{ uri: "https://xsgames.co/randomusers/avatar.php?g=female" }}
@@ -18,9 +17,8 @@ const Header = () => {
         </View>
       </View>
 
-      {/* Ikon Notifikasi */}
+      
       <TouchableOpacity onPress={() => {}}>
-        {/* Bungkus dengan <Text> jika ada teks */}
         <Ionicons name="notifications-outline" size={24} color={Colors.black} />
       </TouchableOpacity>
     </View>

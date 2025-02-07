@@ -34,7 +34,6 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
         const { options } = descriptors[route.key];
         let label = options.tabBarLabel ?? options.title ?? route.name;
 
-        // Pastikan label selalu berupa string
         if (typeof label !== 'string') {
           label = String(label);
         }

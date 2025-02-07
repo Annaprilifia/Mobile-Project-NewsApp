@@ -2,6 +2,7 @@ import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Tabs } from 'expo-router'
 import { TabBar } from '@/components/TabBar'
+import { StyleSheet } from 'react-native'
 
 const TabLayout = () => {
   return (

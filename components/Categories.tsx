@@ -10,17 +10,16 @@ type Props = {
 
 const Categories = ({onCategoryChanged}: Props) => {
   const scrollRef = useRef<ScrollView>(null);
-  const itemPositions = useRef<{ x: number; index: number }[]>([]); // Menyimpan posisi elemen
+  const itemPositions = useRef<{ x: number; index: number }[]>([]); 
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleSelectCategory = (index: number) => {
-    const position = itemPositions.current.find((pos) => pos.index === index); // Cari posisi elemen berdasarkan index
+    const position = itemPositions.current.find((pos) => pos.index === index); 
     if (position) {
-      console.log(`Scrolling to position: ${position.x}`); // Debug posisi scroll
-      scrollRef.current?.scrollTo({ x: position.x - 20, y: 0, animated: true }); // Scroll ke posisi elemen
+      console.log(`Scrolling to position: ${position.x}`); 
+      scrollRef.current?.scrollTo({ x: position.x - 20, y: 0, animated: true }); 
     }
-    setActiveIndex(index); // Update state untuk elemen yang aktif
-  
+    setActiveIndex(index); 
     onCategoryChanged (newsCategoryList[index].slug);
 
 };
@@ -39,9 +38,9 @@ const Categories = ({onCategoryChanged}: Props) => {
             <View
               key={index}
               onLayout={(event) => {
-                const { x } = event.nativeEvent.layout; // Mendapatkan posisi elemen saat dirender
-                itemPositions.current[index] = { x, index }; // Menyimpan posisi elemen
-                console.log(`Item ${index} position: ${x}`); // Debug posisi elemen
+                const { x } = event.nativeEvent.layout; 
+                itemPositions.current[index] = { x, index }; 
+                console.log(`Item ${index} position: ${x}`); 
               }}
             >
               <TouchableOpacity

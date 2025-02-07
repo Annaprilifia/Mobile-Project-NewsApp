@@ -55,7 +55,6 @@ const TabBarButton = ({
           focused={isFocused}
         />
       ) : (
-        // Jika tidak ada, tampilkan ikon default atau kosong
         <></>
       )}
 
@@ -68,7 +67,7 @@ const TabBarButton = ({
           animatedTextStyle,
         ]}
       >
-        {label}
+        <Text>{label}</Text>
       </Animated.Text>
     </Pressable>
   );

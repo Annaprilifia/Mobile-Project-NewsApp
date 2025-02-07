@@ -18,7 +18,6 @@ const pagination = ({items, paginationIndex, scrollX} : Props) => {
           <Animated.View style={[styles.dot, {backgroundColor: paginationIndex === index ? Colors.tint : Colors.darkGrey}]} key={index}/>
         );
       })}
-      
     </View>
   )
 }

@@ -50,7 +50,7 @@ const Page = (props: Props) => {
             keyExtractor={(item, index) => `list_item${index}`}
             showsVerticalScrollIndicator={false}
             renderItem={({ item, index }) => (
-              <Link href={`/news/${item.article_id}`} asChild> {/* Fixed URL structure */}
+              <Link href={`/news/${item.article_id}`} asChild>
                 <TouchableOpacity key={index}>
                   <NewsItem item={item} />
                 </TouchableOpacity>

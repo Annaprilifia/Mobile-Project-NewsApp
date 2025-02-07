@@ -43,7 +43,7 @@ const CheckBox = ({ label, checked, onPress }: Props) => {
               layout={LinearTransition.springify().mass(0.8)}
             >
                 <Animated.Text style={[styles.label, rnTextStyle]}>
-                    {label}
+                    <Text>{label}</Text>
                 </Animated.Text>
                 {checked && (
                     <Animated.View 

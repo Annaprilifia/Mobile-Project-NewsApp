@@ -7,32 +7,32 @@ import { Link } from 'expo-router'
 
 
 type Props = {
-    newsList: Array<NewsDataType> | undefined; // Bisa undefined
+    newsList: Array<NewsDataType> | undefined; 
 }
 
 const NewsList = ({ newsList }: Props) => {
   const [sourceIcons, setSourceIcons] = useState<any>({});
 
-  // Fungsi untuk validasi URL
+  
   const getFaviconUrl = (sourceUrl: string) => {
     try {
       const url = new URL(sourceUrl);
-      return `https://logo.clearbit.com/${url.hostname}`; // Menggunakan Clearbit Logo API
+      return `https://logo.clearbit.com/${url.hostname}`; 
     } catch (error) {
       console.warn("Invalid URL for favicon:", sourceUrl);
-      return 'https://example.com/default-icon.png'; // Ganti dengan URL favicon default
+      return 'https://example.com/default-icon.png'; 
     }
   };
 
   useEffect(() => {
-    // Menangani favicon untuk setiap news item
+  
     const fetchFavicon = async () => {
-      if (!newsList) return; // Tambahkan pemeriksaan untuk mencegah error saat newsList undefined
+      if (!newsList) return; 
       const icons: any = {};
       for (let item of newsList) {
         let faviconUrl = item.source_icon || getFaviconUrl(item.url);
         if (!faviconUrl) {
-          faviconUrl = 'https://example.com/default-icon.png'; // Fallback URL
+          faviconUrl = 'https://example.com/default-icon.png';
         }
         icons[item.id] = faviconUrl;
       }
